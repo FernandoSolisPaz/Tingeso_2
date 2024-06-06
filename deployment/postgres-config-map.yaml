@@ -5,6 +5,6 @@ metadata:
   labels:
     app: postgres-config-map
 data:
-  DB_HOST_REPAIR: repair-db
+  DB_HOST_REPAIR: repair-db-service
   DB_PORT_REPAIR: "5432"
   DB_NAME_REPAIR: repair_db
