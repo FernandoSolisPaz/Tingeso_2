@@ -15,7 +15,7 @@ spec:
         app: repair-deployment
     spec:
       containers:
-        - name: repair
+        - name: repair-service
           image: fernandosolispaz/repair-service
           ports:
             - containerPort: 8091
