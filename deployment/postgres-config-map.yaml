@@ -11,3 +11,6 @@ data:
   DB_HOST_VEHICLE: vehicle-db-service
   DB_PORT_VEHICLE: "5432"
   DB_NAME_VEHICLE: vehicle_db
+  DB_HOST_RECEIPT: receipt-db-service
+  DB_PORT_RECEIPT: "5432"
+  DB_NAME_RECEIPT: receipt_db

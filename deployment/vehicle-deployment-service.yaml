@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: vehicle-service
-          image: fernandosolispaz/vehicle
+          image: fernandosolispaz/vehicle-service
           ports:
             - containerPort: 8090
           env:
