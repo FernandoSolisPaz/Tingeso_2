@@ -168,7 +168,7 @@ public class ReceiptService {
             } else if (Id == 10) {
                 repairName = "Windshield and Glass";
             }
-            RepairsModel repair = restTemplate.getForObject("http://repairs-service/repairs/motorId/" + typeOfMotor + "/repairName/" + repairName, RepairsModel.class);
+            RepairsModel repair = restTemplate.getForObject("http://repair-service/repairs/motorId/" + typeOfMotor + "/repairName/" + repairName, RepairsModel.class);
             ReceiptRepairsEntity dummy2 = new ReceiptRepairsEntity();
             dummy2.setReceiptId(dummy.getId());
             dummy2.setRepairId((repair.getRepairId()));
@@ -178,7 +178,7 @@ public class ReceiptService {
         List<ReceiptRepairsEntity> repairs = receiptRepairsService.getByReceiptId(dummy.getId());
         int repairsSum = 0;
         for (ReceiptRepairsEntity receiptRepairsDummy : repairs) {
-            RepairsModel repair = restTemplate.getForObject("http://repairs-service/repairs/" + receiptRepairsDummy.getRepairId(), RepairsModel.class);
+            RepairsModel repair = restTemplate.getForObject("http://repair-service/repairs/" + receiptRepairsDummy.getRepairId(), RepairsModel.class);
             repairsSum = repairsSum + repair.getCostOfRepair();
         }
         dummy.setCostOfRepair(repairsSum);
