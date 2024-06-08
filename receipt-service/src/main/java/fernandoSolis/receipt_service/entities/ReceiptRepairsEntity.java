@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "receipt_repairs")
@@ -23,4 +25,19 @@ public class ReceiptRepairsEntity {
 
     @Column(name = "repairId")
     private Long repairId;
+
+    @Column (name = "plate")
+    private String plate;
+
+    @Column (name = "repairDate")
+    private LocalDate repairDate;
+
+    @Column (name = "repairTime")
+    private LocalTime repairTime;
+
+    @Column (name = "costOfTheRepair")
+    private int costOfTheRepair;
+
+    @Column (name = "nameOfTheRepair")
+    private String nameOfTheRepair;
 }

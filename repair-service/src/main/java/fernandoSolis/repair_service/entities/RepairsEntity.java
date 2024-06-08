@@ -16,8 +16,8 @@ public class RepairsEntity {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    @Column(name = "repairId")
-    private Long repairId;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "repairName")
     private String repairName;

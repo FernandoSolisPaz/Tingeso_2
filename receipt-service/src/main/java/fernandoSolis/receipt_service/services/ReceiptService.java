@@ -35,6 +35,9 @@ public class ReceiptService {
     public List<ReceiptEntity> getReceiptByCarPlate(String plate){ return receiptRepository.findByCarPlate(plate); }
 
     public ReceiptEntity updateReceipt(ReceiptEntity receipt){
+        float Surcharge_total_amount;
+        float Discount_total_amount;
+        float IVAAmount;
         float IVA = 0.19f;
         if(receipt.getWorkshopOutDate()!= null && receipt.getWorkshopOutHour() != null && receipt.getPickUpDate() != null && receipt.getPickUpHour() != null){
             LocalDateTime workshopOut = receipt.getWorkshopOutDate().atTime(receipt.getWorkshopOutHour());
@@ -53,8 +56,14 @@ public class ReceiptService {
             receipt.setDelayOfPickUpSurcharge(late_pickup_surcharge);
         }
         int repairsSum = receipt.getCostOfRepair();
+        Surcharge_total_amount = repairsSum * receipt.getAgeVehicleSurcharge() + repairsSum * receipt.getKilometersSurcharge() + repairsSum * receipt.getDelayOfPickUpSurcharge();
+        receipt.setSurchargeTotalAmount(Surcharge_total_amount);
+        Discount_total_amount = receipt.getBrandBond() + repairsSum * receipt.getDayOfAttentionDisc() + repairsSum * receipt.getNumberOfRepairsDisc();
+        receipt.setDiscountTotalAmount(Discount_total_amount);
         float cost = (repairsSum - receipt.getBrandBond() - repairsSum * receipt.getDayOfAttentionDisc() - repairsSum * receipt.getNumberOfRepairsDisc() + repairsSum * receipt.getAgeVehicleSurcharge() + repairsSum * receipt.getKilometersSurcharge() + repairsSum * receipt.getDelayOfPickUpSurcharge());
         float totalCost = cost + cost * IVA;
+        IVAAmount = cost * IVA;
+        receipt.setIvaAmount(IVAAmount);
         receipt.setTotalAmount(totalCost);
         return receiptRepository.save(receipt);
     }
@@ -171,7 +180,12 @@ public class ReceiptService {
             RepairsModel repair = restTemplate.getForObject("http://repair-service/repairs/motorId/" + typeOfMotor + "/repairName/" + repairName, RepairsModel.class);
             ReceiptRepairsEntity dummy2 = new ReceiptRepairsEntity();
             dummy2.setReceiptId(dummy.getId());
-            dummy2.setRepairId((repair.getRepairId()));
+            dummy2.setRepairId((repair.getId()));
+            dummy2.setPlate(receipt.getCarPlate());
+            dummy2.setRepairDate(dummy.getWorkshopInDate());
+            dummy2.setRepairTime(dummy.getWorkshopInHour());
+            dummy2.setCostOfTheRepair(repair.getCostOfRepair());
+            dummy2.setNameOfTheRepair(repair.getRepairName());
             receiptRepairsService.saveReceiptRepairs(dummy2);
         }
 

@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/administrate")
-@CrossOrigin("*")
 public class ReceiptController {
     @Autowired
     Car_brandService car_BrandService;

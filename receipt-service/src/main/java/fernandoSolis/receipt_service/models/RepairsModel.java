@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RepairsModel {
 
-    private Long repairId;
+    private Long id;
 
     private String repairName;
 

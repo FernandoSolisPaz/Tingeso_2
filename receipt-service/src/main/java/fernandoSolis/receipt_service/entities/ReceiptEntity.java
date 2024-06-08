@@ -64,4 +64,13 @@ public class ReceiptEntity {
     @Column (name = "kilometersSurcharge")
     private float kilometersSurcharge;
 
+    @Column (name = "surchargeTotalAmount")
+    private float surchargeTotalAmount;
+
+    @Column (name = "discountTotalAmount")
+    private float discountTotalAmount;
+
+    @Column (name = "ivaAmount")
+    private float ivaAmount;
+
 }
