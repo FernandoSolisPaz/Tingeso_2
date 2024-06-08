@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import receiptService from "../services/receipt.service";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +8,15 @@ import FormControl from "@mui/material/FormControl";
 import SaveIcon from "@mui/icons-material/Save";
 import {FormControlLabel} from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
+import repairService from "../services/repair.service.js";
+import carService from "../services/car.service.js";
 
 const RegisterRepair = () => {
     const [carPlate, setCarPlate] = useState("");
     const [camp2Habilitated, setCamp2] = useState(false);
     const [repairIds, setRepairIds] = useState([]);
+    const [repairs, setRepairs] = useState([]);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     let tittle = "Register a repair for a car";
 
@@ -34,14 +38,40 @@ const RegisterRepair = () => {
 
 
 
-    const handleCarPlateChange = (value) => {
+    const handleCarPlateChange = async (value) => {
+        setCamp2(false);
+        setRepairIds([]);
+        setRepairs([]);
+        setLoading(true);
         if (value.trim() !== '') {
-            setCamp2(true);
+            const car = await carService.get(value)
+            const motorType = car.data.motor
+            if (motorType !== "") {
+                console.log(motorType);
+                setCamp2(true);
+                repairService.getByMotor(motorType)
+                    .then(response => {
+                        console.log(response.data);
+                        setRepairs(response.data)
+                    })
+                    .catch((error) => {
+                        console.log(
+                            "An error has occurred trying to display the list of repairs.",
+                            error
+                        );
+                    });
+            } else {
+                setCamp2(false);
+                setRepairIds([]);
+                setRepairs([]);
+            }
+
         } else {
             setCamp2(false);
             setRepairIds([]);
+            setRepairs([]);
         }
-    };
+    }
 
     const handleCheckboxChange = (event) => {
         const value = parseInt(event.target.value, 10);
@@ -53,6 +83,10 @@ const RegisterRepair = () => {
             setRepairIds(repairIds.filter(item => item !== value));
         }
     };
+
+    useEffect(() => {
+        setLoading(false);
+    }, [repairs]);
 
     return(
         <Box
@@ -78,63 +112,20 @@ const RegisterRepair = () => {
                         helperText="Ej. CGZA96"
                     />
                 </FormControl>
-                <FormControl style={{width: '100%'}}>
+                <FormControl style={{ width: '100%' }}>
                     <legend>Options of Repairs:</legend>
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Braking System"
-                        value={0}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Refrigeration System"
-                        value={1}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Motor"
-                        value={2}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Transmision"
-                        value={3}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Electric System"
-                        value={4}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Escape System"
-                        value={5}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Tyres and Wheels"
-                        value={6}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Suspension and steering"
-                        value={7}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="AC and Heating System"
-                        value={8}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Fuel System"
-                        value={9}
-                    />
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated}/>}
-                        label="Windshield and Glass"
-                        value={10}
-                    />
+                    {loading ? (
+                        <p>Loading repairs...</p>
+                    ) : (
+                        repairs.map((repair) => (
+                            <FormControlLabel
+                                key={repair.id}
+                                control={<Checkbox onChange={handleCheckboxChange} disabled={!camp2Habilitated} />}
+                                label={repair.repairName}
+                                value={repair.id}
+                            />
+                        ))
+                    )}
                 </FormControl>
                 <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
                     <FormControl>

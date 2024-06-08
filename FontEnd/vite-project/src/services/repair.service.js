@@ -8,6 +8,10 @@ const get = id => {
     return httpClient.get(`/repairs/${id}`)
 }
 
+const getByMotor = id => {
+    return httpClient.get(`/repairs/Motor/${id}`)
+}
+
 const create = data => {
     return httpClient.post('/repairs/', data);
 }
@@ -20,4 +24,4 @@ const remove = id => {
     return httpClient.delete(`/repairs/${id}`);
 }
 
-export default  {getAll, get, create, update, remove};
+export default  {getAll, get, getByMotor, create, update, remove};

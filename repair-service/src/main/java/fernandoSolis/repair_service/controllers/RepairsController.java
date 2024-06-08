@@ -26,6 +26,12 @@ public class RepairsController {
         return ResponseEntity.ok(repair);
     }
 
+    @GetMapping("/Motor/{id}")
+    public ResponseEntity<List<RepairsEntity>> getRepairByMotorId(@PathVariable int id) {
+        List<RepairsEntity> repairs = repairsService.getByMotorId(id);
+        return ResponseEntity.ok(repairs);
+    }
+
     @GetMapping("/motorId/{id}/repairName/{name}")
     public ResponseEntity<RepairsEntity> getRepairByMotorIdAndRepairName(@PathVariable int id, @PathVariable String name) {
         RepairsEntity repair = repairsService.getByMotorIdAndRepairName(id, name);

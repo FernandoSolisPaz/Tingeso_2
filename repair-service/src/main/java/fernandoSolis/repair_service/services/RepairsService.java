@@ -32,4 +32,7 @@ public class RepairsService {
         }
     }
 
+    public List<RepairsEntity> getByMotorId(int id) { return repairsRepository.findByTypeOfMotor(id); }
+
+
 }
