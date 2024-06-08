@@ -153,31 +153,8 @@ public class ReceiptService {
 
         ReceiptEntity dummy = receiptRepository.save(newReceipt);
         for(Integer Id: repairIds){
-            String repairName = "";
-            if(Id == 0) {
-                repairName = "Braking System";
-            } else if (Id == 1) {
-                repairName = "Refrigeration System";
-            } else if (Id == 2) {
-                repairName = "Motor";
-            } else if (Id == 3) {
-                repairName = "Transmision";
-            } else if (Id == 4) {
-                repairName = "Electric System";
-            } else if (Id == 5) {
-                repairName = "Escape System";
-            } else if (Id == 6) {
-                repairName = "Tyres and Wheels";
-            } else if (Id == 7) {
-                repairName = "Suspension and steering";
-            } else if (Id == 8) {
-                repairName = "AC and Heating System";
-            } else if (Id == 9) {
-                repairName = "Fuel System";
-            } else if (Id == 10) {
-                repairName = "Windshield and Glass";
-            }
-            RepairsModel repair = restTemplate.getForObject("http://repair-service/repairs/motorId/" + typeOfMotor + "/repairName/" + repairName, RepairsModel.class);
+            Long repairId = Id.longValue();
+            RepairsModel repair = restTemplate.getForObject("http://repair-service/repairs/" + repairId, RepairsModel.class);
             ReceiptRepairsEntity dummy2 = new ReceiptRepairsEntity();
             dummy2.setReceiptId(dummy.getId());
             dummy2.setRepairId((repair.getId()));
