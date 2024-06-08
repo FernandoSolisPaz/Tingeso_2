@@ -44,4 +44,9 @@ public class RepairsController {
         return ResponseEntity.ok(repairUpdated);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteRepairById(@PathVariable Long id) throws Exception {
+        var isDeleted = repairsService.deleteRepair(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -23,4 +23,13 @@ public class RepairsService {
 
     public RepairsEntity getByMotorIdAndRepairName(int id, String name) { return repairsRepository.findByMotorAndRepairName(id, name); }
 
+    public boolean deleteRepair(Long id) throws Exception{
+        try{
+            repairsRepository.deleteById(id);
+            return true;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }
