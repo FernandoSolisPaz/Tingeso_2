@@ -37,6 +37,7 @@ function App() {
                   <Route path="/receipts/details/:id" element={<ReceiptShow/>}/>
                   <Route path="/repairs/list" element={<RepairList/>}/>
                   <Route path="/repairs/add" element={<RegisterNewRepair/>}/>
+                  <Route path="/repairs/edit/:repairURL" element={<RegisterNewRepair/>}/>
                   <Route path="/report/list" element={<ReportList />}/>
                   <Route path="/reportTypeRepair" element={<ReportTypeRepair/>}/>
                   <Route path="/reportMotorRepair" element={<ReportMotorRepair/>}/>

@@ -24,7 +24,7 @@ public class ReceiptController {
     @Autowired
     ReceiptService receiptService;
 
-    @GetMapping("/receipt")
+    @GetMapping("/receipt/")
     public ResponseEntity<List<ReceiptEntity>> listReceipts() {
         List<ReceiptEntity> receipt = receiptService.getReceipts();
         return ResponseEntity.ok(receipt);
@@ -42,13 +42,13 @@ public class ReceiptController {
         return ResponseEntity.ok(receipts);
     }
 
-    @PostMapping("/receipt")
+    @PostMapping("/receipt/")
     public ResponseEntity<ReceiptEntity> saveReceipt(@RequestBody ReceiptEntity receipt, @RequestParam("repairIds") List<Integer> repairIds) {
         ReceiptEntity receiptNew = receiptService.saveReceipt(receipt, repairIds);
         return ResponseEntity.ok(receiptNew);
     }
 
-    @PutMapping("/receipt")
+    @PutMapping("/receipt/")
     public ResponseEntity<ReceiptEntity> updateReceipt(@RequestBody ReceiptEntity repair) {
         ReceiptEntity repairUpdated = receiptService.updateReceipt(repair);
         return ResponseEntity.ok(repairUpdated);
@@ -73,7 +73,7 @@ public class ReceiptController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/car_brand")
+    @GetMapping("/car_brand/")
     public ResponseEntity<List<Car_brandEntity>> listCar_brands() {
         List<Car_brandEntity> car_brands = car_BrandService.getCarBrand();
         return ResponseEntity.ok(car_brands);
@@ -85,13 +85,13 @@ public class ReceiptController {
         return ResponseEntity.ok(car_brand);
     }
 
-    @PostMapping("/car_brand")
+    @PostMapping("/car_brand/")
     public ResponseEntity<Car_brandEntity> saveCarBrand(@RequestBody Car_brandEntity car_brand) {
         Car_brandEntity car_brandNew = car_BrandService.saveCarBrand(car_brand);
         return ResponseEntity.ok(car_brandNew);
     }
 
-    @PutMapping("/car_brand")
+    @PutMapping("/car_brand/")
     public ResponseEntity<Car_brandEntity> updateCarBrand(@RequestBody Car_brandEntity car_brand) {
         Car_brandEntity car_brandUpdated = car_BrandService.updateCarBrand(car_brand);
         return ResponseEntity.ok(car_brandUpdated);
@@ -103,7 +103,7 @@ public class ReceiptController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/receiptsRepairs")
+    @GetMapping("/receiptsRepairs/")
     public ResponseEntity<List<ReceiptRepairsEntity>> listReceiptRepairs() {
         List<ReceiptRepairsEntity> receiptrepairsList = receiptRepairsService.getReceiptRepairs();
         return ResponseEntity.ok(receiptrepairsList);
@@ -115,13 +115,13 @@ public class ReceiptController {
         return ResponseEntity.ok(receiptrepairsList);
     }
 
-    @PostMapping("/receiptsRepairs")
+    @PostMapping("/receiptsRepairs/")
     public ResponseEntity<ReceiptRepairsEntity> saveReceiptRepair(@RequestBody ReceiptRepairsEntity receiptRepair){
         ReceiptRepairsEntity receiptRepairNew = receiptRepairsService.saveReceiptRepairs(receiptRepair);
         return ResponseEntity.ok(receiptRepairNew);
     }
 
-    @PutMapping("/receiptsRepairs")
+    @PutMapping("/receiptsRepairs/")
     public ResponseEntity<ReceiptRepairsEntity> updateReceiptRepairs(@RequestBody ReceiptRepairsEntity receiptRepair) {
         ReceiptRepairsEntity receiptRepairUpdated = receiptRepairsService.updateReceiptRepairs(receiptRepair);
         return ResponseEntity.ok(receiptRepairUpdated);

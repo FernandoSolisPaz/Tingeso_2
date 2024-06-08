@@ -77,56 +77,51 @@ const RegisterNewRepair = () => {
             component="form"
         >
             <h3>{titleRepairForm}</h3>
-            <hr />
-            <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: '1rem' }}>
-                    <FormControl style={{ width: '49%' }}>
-                        <TextField
-                            id="repairName"
-                            label="RepairName"
-                            value={repairName}
-                            variant="standard"
-                            onChange={(r) => setRepairName(r.target.value)}
-                        />
-                    </FormControl>
-                </div>
+            <form style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <FormControl style={{width: '70%'}}>
+                    <TextField
+                        id="repairName"
+                        label="RepairName"
+                        value={repairName}
+                        variant="standard"
+                        onChange={(r) => setRepairName(r.target.value)}
+                    />
+                </FormControl>
+                <br/>
+                <FormControl style={{width: '70%'}}>
+                    <TextField
+                        id="typeOfMotor"
+                        label="TypeOfMotor"
+                        value={typeOfMotor}
+                        variant="standard"
+                        onChange={(r) => setTypeOfMotor(r.target.value)}
+                    />
+                </FormControl>
+                <br/>
+                <FormControl style={{width: '70%'}}>
+                    <TextField
+                        id="costOfRepair"
+                        label="CostOfRepair"
+                        value={costOfRepair}
+                        variant="standard"
+                        onChange={(r) => setCostOfRepair(r.target.value)}
+                    />
+                </FormControl>
+                <br/>
+                <FormControl>
+                    <Button
+                        variant="contained"
+                        color="info"
+                        onClick={(c) => saveRepair(c)}
+                        style={{marginTop: '1rem'}}
+                        startIcon={<SaveIcon/>}
+                    >
+                        Save
+                    </Button>
+                </FormControl>
 
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: '1rem' }}>
-                    <FormControl style={{ width: '49%' }}>
-                        <TextField
-                            id="typeOfMotor"
-                            label="TypeOfMotor"
-                            value={typeOfMotor}
-                            variant="standard"
-                            onChange={(r) => setTypeOfMotor(r.target.value)}
-                        />
-                    </FormControl>
-
-                    <FormControl style={{ width: '49%' }}>
-                        <TextField
-                            id="costOfRepair"
-                            label="CostOfRepair"
-                            value={costOfRepair}
-                            variant="standard"
-                            onChange={(r) => setCostOfRepair(r.target.value)}
-                        />
-                    </FormControl>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                    <FormControl>
-                        <Button
-                            variant="contained"
-                            color="info"
-                            onClick={(c) => saveRepair(c)}
-                            style={{ marginTop: '1rem' }}
-                            startIcon={<SaveIcon/>}
-                        >
-                            Save
-                        </Button>
-                    </FormControl>
-                </div>
             </form>
-            <hr />
+            <hr/>
             <Link to="/repairs/list">Return to the list</Link>
         </Box>
 
