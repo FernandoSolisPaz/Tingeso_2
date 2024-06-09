@@ -170,9 +170,9 @@ public class ReceiptService {
             Integer check = restTemplate.getForObject("http://report-service/reports/RepTypeVehType/Month/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName(), Integer.class);
             if(check == 0){
                 restTemplate.postForObject("http://report-service/reports/RepTypeVehType/Month/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName(), null, Boolean.class);
-                restTemplate.put("http://report-service/reports/RepTypeVehType/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName() + "/Type/" + car_dummy1.getType() + "/Cost/" + repair.getCostOfRepair(), null);
+                restTemplate.put("http://report-service/reports/RepTypeVehType/Month/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName() + "/Type/" + car_dummy1.getType() + "/Cost/" + repair.getCostOfRepair(), null);
             } else if(check == 1){
-                restTemplate.put("http://report-service/reports/RepTypeVehType/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName() + "/Type/" + car_dummy1.getType() + "/Cost/" + repair.getCostOfRepair(), null);
+                restTemplate.put("http://report-service/reports/RepTypeVehType/Month/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName() + "/Type/" + car_dummy1.getType() + "/Cost/" + repair.getCostOfRepair(), null);
             }
         }
 
