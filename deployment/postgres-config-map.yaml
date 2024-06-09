@@ -14,3 +14,6 @@ data:
   DB_HOST_RECEIPT: receipt-db-service
   DB_PORT_RECEIPT: "5432"
   DB_NAME_RECEIPT: receipt_db
+  DB_HOST_REPORT: report-db-service
+  DB_PORT_REPORT: "5432"
+  DB_NAME_REPORT: report_db

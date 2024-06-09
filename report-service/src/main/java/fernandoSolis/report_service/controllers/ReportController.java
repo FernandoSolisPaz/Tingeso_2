@@ -34,15 +34,36 @@ public class ReportController {
         return ResponseEntity.ok(reports);
     }
 
-    @PostMapping("/RepTypeVehType/")
-    public ResponseEntity<ReportRepairTypeVehicleTypeEntity> saveReport(@RequestBody ReportRepairTypeVehicleTypeEntity report){
+    @GetMapping("/RepTypeVehType/Month/{month}/Year/{year}/RepairName/{name}")
+    public ResponseEntity<Integer> check(@PathVariable int month, @PathVariable int year, @PathVariable String name){
+        return ResponseEntity.ok(reportRepairTypeVehicleTypeService.check(month, year, name));
+    }
+
+    @PostMapping("/RepTypeVehType/Month/{month}/Year/{year}/RepairName/{name}")
+    public ResponseEntity<ReportRepairTypeVehicleTypeEntity> saveReport(@PathVariable int month, @PathVariable int year, @PathVariable String name){
+        ReportRepairTypeVehicleTypeEntity report = new ReportRepairTypeVehicleTypeEntity();
+        report.setMonth(month);
+        report.setYear(year);
+        report.setRepairName(name);
+        report.setSedanCount(0);
+        report.setHatchbackCount(0);
+        report.setSuvCount(0);
+        report.setPickupCount(0);
+        report.setFurgonetaCount(0);
+        report.setSedanTotalAmount(0);
+        report.setHatchbackTotalAmount(0);
+        report.setSuvTotalAmount(0);
+        report.setPickupTotalAmount(0);
+        report.setFurgonetaTotalAmount(0);
+        report.setTotalAmount(0);
+        report.setTotalCount(0);
         ReportRepairTypeVehicleTypeEntity reportNew = reportRepairTypeVehicleTypeService.saveEntity(report);
         return ResponseEntity.ok(reportNew);
     }
 
-    @PutMapping("/RepTypeVehType/")
-    public ResponseEntity<ReportRepairTypeVehicleTypeEntity> updateReport(@RequestBody ReportRepairTypeVehicleTypeEntity report){
-        ReportRepairTypeVehicleTypeEntity reportUpdated = reportRepairTypeVehicleTypeService.updateEntity(report);
+    @PutMapping("/RepTypeVehType/Month/{month}/Year/{year}/RepairName/{name}/Type/{id}/Cost/{cost}")
+    public ResponseEntity<ReportRepairTypeVehicleTypeEntity> updateReport(@PathVariable int month, @PathVariable int year, @PathVariable String name, @PathVariable int id, @PathVariable int cost){
+        ReportRepairTypeVehicleTypeEntity reportUpdated = reportRepairTypeVehicleTypeService.updateEntity(month, year,name, id, cost);
         return ResponseEntity.ok(reportUpdated);
     }
 
