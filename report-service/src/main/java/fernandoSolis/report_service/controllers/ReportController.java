@@ -2,7 +2,9 @@ package fernandoSolis.report_service.controllers;
 
 
 import fernandoSolis.report_service.entities.ReportRepairTypeVehicleTypeEntity;
+import fernandoSolis.report_service.services.ReportRepairTypeVariationService;
 import fernandoSolis.report_service.services.ReportRepairTypeVehicleTypeService;
+import fernandoSolis.report_service.entities.ReportRepairTypeVariationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import java.util.List;
 public class ReportController {
     @Autowired
     ReportRepairTypeVehicleTypeService reportRepairTypeVehicleTypeService;
+    @Autowired
+    ReportRepairTypeVariationService reportRepairTypeVariationService;
 
     @GetMapping("/RepTypeVehType/")
     public ResponseEntity<List<ReportRepairTypeVehicleTypeEntity>> getAllRepTypeVehType(){
@@ -71,5 +75,17 @@ public class ReportController {
     public ResponseEntity<Boolean> deleteReport(@PathVariable Long id) throws Exception{
         var isDeleted = reportRepairTypeVehicleTypeService.deleteEntity(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/RepTypeVar/")
+    public ResponseEntity<List<ReportRepairTypeVariationEntity>> getAllRepTypeVariation(){
+        List<ReportRepairTypeVariationEntity> reports = reportRepairTypeVariationService.getAll();
+        return ResponseEntity.ok(reports);
+    }
+
+    @GetMapping("/RepTypeVar/Generate/Month/{month}/Year/{year}")
+    public ResponseEntity<List<ReportRepairTypeVariationEntity>> getRepTypeVariationGenerate(@PathVariable int month, @PathVariable int year){
+        List<ReportRepairTypeVariationEntity> reports = reportRepairTypeVariationService.getReportRepairTypeVariation(month, year);
+        return ResponseEntity.ok(reports);
     }
 }

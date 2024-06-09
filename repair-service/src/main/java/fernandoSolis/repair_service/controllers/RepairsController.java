@@ -38,6 +38,12 @@ public class RepairsController {
         return ResponseEntity.ok(repair);
     }
 
+    @GetMapping("/Names/")
+    public ResponseEntity<List<String>> getRepairNames() {
+        List<String> names = repairsService.getAllRepairNames();
+        return ResponseEntity.ok(names);
+    }
+
     @PostMapping("/")
     public ResponseEntity<RepairsEntity> saveRepair(@RequestBody RepairsEntity repair) {
         RepairsEntity repairNew = repairsService.saveRepair(repair);

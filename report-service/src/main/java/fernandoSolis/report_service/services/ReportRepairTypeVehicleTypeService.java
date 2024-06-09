@@ -66,4 +66,8 @@ public class ReportRepairTypeVehicleTypeService {
     public int check(int month, int year, String name) {
         return reportRepairTypeVehicleTypeRepository.check(month, year, name);
     }
+
+    public ReportRepairTypeVehicleTypeEntity getByMonthAndYearAndRepairName(int month, int year, String repairName){
+        return reportRepairTypeVehicleTypeRepository.findByNameAndMonthAndYear(month, year, repairName);
+    }
 }

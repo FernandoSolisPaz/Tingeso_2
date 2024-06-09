@@ -17,4 +17,7 @@ public interface RepairsRepository extends JpaRepository<RepairsEntity, Long>{
     @Query(value = "Select r FROM RepairsEntity  r WHERE r.typeOfMotor = :typeOfMotor")
     List<RepairsEntity> findByTypeOfMotor(@Param("typeOfMotor") int typeOfMotor);
 
+    @Query(value = "SELECT DISTINCT r.repairName FROM RepairsEntity r")
+    List<String> findAllRepairNames();
+
 }

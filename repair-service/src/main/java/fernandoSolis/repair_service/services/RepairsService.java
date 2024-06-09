@@ -34,5 +34,7 @@ public class RepairsService {
 
     public List<RepairsEntity> getByMotorId(int id) { return repairsRepository.findByTypeOfMotor(id); }
 
+    public List<String> getAllRepairNames() { return repairsRepository.findAllRepairNames(); }
+
 
 }
