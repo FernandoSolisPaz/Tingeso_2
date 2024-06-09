@@ -10,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.*;
 import java.util.List;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+
 @Service
 public class ReceiptService {
 
@@ -152,7 +150,7 @@ public class ReceiptService {
         }
 
         ReceiptEntity dummy = receiptRepository.save(newReceipt);
-        for(Integer Id: repairIds){
+        for(Integer Id: repairIds) {
             Long repairId = Id.longValue();
             RepairsModel repair = restTemplate.getForObject("http://repair-service/repairs/" + repairId, RepairsModel.class);
             ReceiptRepairsEntity dummy2 = new ReceiptRepairsEntity();
@@ -164,6 +162,18 @@ public class ReceiptService {
             dummy2.setCostOfTheRepair(repair.getCostOfRepair());
             dummy2.setNameOfTheRepair(repair.getRepairName());
             receiptRepairsService.saveReceiptRepairs(dummy2);
+            LocalDate today = LocalDate.now();
+            int year = today.getYear();
+            Month month = today.getMonth();
+            int monthOfYear = month.getValue();
+
+            Integer check = restTemplate.getForObject("http://report-service/reports/RepTypeVehType/Month/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName(), Integer.class);
+            if(check == 0){
+                restTemplate.postForObject("http://report-service/reports/RepTypeVehType/Month/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName(), null, Boolean.class);
+                restTemplate.put("http://report-service/reports/RepTypeVehType/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName() + "/Type/" + car_dummy1.getType() + "/Cost/" + repair.getCostOfRepair(), null);
+            } else if(check == 1){
+                restTemplate.put("http://report-service/reports/RepTypeVehType/" + monthOfYear + "/Year/" + year + "/RepairName/" + repair.getRepairName() + "/Type/" + car_dummy1.getType() + "/Cost/" + repair.getCostOfRepair(), null);
+            }
         }
 
         List<ReceiptRepairsEntity> repairs = receiptRepairsService.getByReceiptId(dummy.getId());

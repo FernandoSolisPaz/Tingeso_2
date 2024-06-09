@@ -40,7 +40,7 @@ public class ReportController {
     }
 
     @PostMapping("/RepTypeVehType/Month/{month}/Year/{year}/RepairName/{name}")
-    public ResponseEntity<ReportRepairTypeVehicleTypeEntity> saveReport(@PathVariable int month, @PathVariable int year, @PathVariable String name){
+    public ResponseEntity<Boolean> saveReport(@PathVariable int month, @PathVariable int year, @PathVariable String name){
         ReportRepairTypeVehicleTypeEntity report = new ReportRepairTypeVehicleTypeEntity();
         report.setMonth(month);
         report.setYear(year);
@@ -58,7 +58,7 @@ public class ReportController {
         report.setTotalAmount(0);
         report.setTotalCount(0);
         ReportRepairTypeVehicleTypeEntity reportNew = reportRepairTypeVehicleTypeService.saveEntity(report);
-        return ResponseEntity.ok(reportNew);
+        return ResponseEntity.ok(true);
     }
 
     @PutMapping("/RepTypeVehType/Month/{month}/Year/{year}/RepairName/{name}/Type/{id}/Cost/{cost}")
