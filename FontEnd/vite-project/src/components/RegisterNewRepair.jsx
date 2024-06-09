@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import SaveIcon from "@mui/icons-material/Save";
+import MenuItem from "@mui/material/MenuItem";
 
 const RegisterNewRepair = () => {
     const [id, setId] = useState("");
@@ -93,9 +94,15 @@ const RegisterNewRepair = () => {
                         id="typeOfMotor"
                         label="TypeOfMotor"
                         value={typeOfMotor}
+                        select
                         variant="standard"
                         onChange={(r) => setTypeOfMotor(r.target.value)}
-                    />
+                    >
+                        <MenuItem value={"0"}>Gasoline</MenuItem>
+                        <MenuItem value={"1"}>Diesel</MenuItem>
+                        <MenuItem value={"2"}>Hybrid</MenuItem>
+                        <MenuItem value={"3"}>Electric</MenuItem>
+                    </TextField>
                 </FormControl>
                 <br/>
                 <FormControl style={{width: '70%'}}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import brandService from "../services/brand.service.js";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const CarBrandList = () => {
     const [carBrands, setCarBrands] = useState([]);
@@ -43,7 +44,17 @@ const CarBrandList = () => {
     return (
         <TableContainer component={Paper}>
             <br />
-            Car Brand List
+            <Link to="/car_brand/register"
+                  style={{ textDecoration: "none", marginBottom: "1rem"}}
+            >
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<AttachMoneyIcon />}
+                >
+                    Add New Car Brand
+                </Button>
+            </Link>
             <br /> <br />
             <Table sx={{ minWidth: 650}} size="small" aria-label= "a dense table">
                 <TableHead>

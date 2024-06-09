@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import repairService from "../services/repair.service.js";
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import ConstructionIcon from '@mui/icons-material/Construction';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -86,7 +86,7 @@ const RepairList = () => {
                 <Button
                     variant="contained"
                     color="primary"
-                    startIcon={<DirectionsCarIcon />}
+                    startIcon={<ConstructionIcon />}
                 >
                     Add New Repair
                 </Button>
