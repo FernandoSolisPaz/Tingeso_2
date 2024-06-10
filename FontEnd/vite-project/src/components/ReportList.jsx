@@ -16,12 +16,8 @@ const ReportList = () => {
         navigate("/reportTypeRepair");
     };
 
-    const handleAvgRepairTypeReport = () =>{
-        navigate("/reportTimeRepair");
-    };
-
-    const handleMotorRepairReport = () =>{
-        navigate("/reportMotorRepair");
+    const handleTypeRepairByMonthReport = () =>{
+        navigate("/reportRepairByMonth");
     };
 
     return (
@@ -29,49 +25,36 @@ const ReportList = () => {
             <h3>{title}</h3>
             <TableBody>
                 <TableCell>
-                    <TableRow align="left" sx={{ fontWeight: "bold", marginBottom: "1rem"  }}>
+                    <TableRow align="left" sx={{fontWeight: "bold", marginBottom: "1rem"}}>
                         Report by Type of Car and Repair
                     </TableRow>
-                    <TableRow align="left" sx={{ fontWeight: "bold", marginBottom: "1rem"  }}>
-                        Report by Average Time Repair and Type
-                    </TableRow>
-                    <TableRow align="left" sx={{ fontWeight: "bold", marginBottom: "1rem"  }}>
-                        Report by Motor and Repair
+                    <br/>
+                    <TableRow align="left" sx={{fontWeight: "bold", marginBottom: "1rem"}}>
+                        Report Type of Repairs by Months
                     </TableRow>
                 </TableCell>
                 <TableCell>
-                    <TableRow align="left" sx={{ fontWeight: "bold", marginBottom: "1rem"  }}>
+                    <TableRow align="left" sx={{fontWeight: "bold", marginBottom: "1rem"}}>
                         <Button
                             variant="contained"
                             color="info"
                             size="small"
                             onClick={() => handleTypeRepairReport()}
-                            style={{ marginLeft: "0.5rem" }}
-                            startIcon={<DescriptionIcon />}
+                            style={{marginLeft: "0.5rem"}}
+                            startIcon={<DescriptionIcon/>}
                         >
                             View Report
                         </Button>
                     </TableRow>
-                    <TableRow align="left" sx={{ fontWeight: "bold", marginBottom: "1rem"  }}>
+                    <br/>
+                    <TableRow align="left" sx={{fontWeight: "bold", marginBottom: "1rem"}}>
                         <Button
                             variant="contained"
                             color="info"
                             size="small"
-                            onClick={() => handleAvgRepairTypeReport()}
-                            style={{ marginLeft: "0.5rem" }}
-                            startIcon={<DescriptionIcon />}
-                        >
-                            View Report
-                        </Button>
-                    </TableRow>
-                    <TableRow align="left" sx={{ fontWeight: "bold", marginBottom: "1rem"  }}>
-                        <Button
-                            variant="contained"
-                            color="info"
-                            size="small"
-                            onClick={() => handleMotorRepairReport()}
-                            style={{ marginLeft: "0.5rem" }}
-                            startIcon={<DescriptionIcon />}
+                            onClick={() => handleTypeRepairByMonthReport()}
+                            style={{marginLeft: "0.5rem"}}
+                            startIcon={<DescriptionIcon/>}
                         >
                             View Report
                         </Button>

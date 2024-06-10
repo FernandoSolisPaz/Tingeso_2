@@ -57,12 +57,6 @@ export default function Sidemenu({ open, toggleDrawer}){
                     <ListItemText primary="Register Repairs" />
                 </ListItemButton>
                 <ListItemButton onClick={() => {
-                    reportService
-                        .createTypeRepairReport()
-                    reportService
-                        .createMotorRepairReport()
-                    reportService
-                        .createTimeRepairReport()
                     navigate("/report/list")
 
                 }}>

@@ -13,8 +13,6 @@ import ReceiptEdit from "./components/ReceiptEdit.jsx";
 import ReceiptShow   from "./components/ReceiptShow.jsx";
 import ReportList from "./components/ReportList.jsx";
 import ReportTypeRepair from "./components/ReportTypeRepair.jsx";
-import ReportMotorRepair from "./components/ReportMotorRepair.jsx";
-import ReportTimeRepair from "./components/ReportTimeRepair.jsx";
 import RepairList from "./components/RepairList.jsx";
 import RegisterNewRepair from "./components/RegisterNewRepair.jsx";
 
@@ -40,8 +38,6 @@ function App() {
                   <Route path="/repairs/edit/:repairURL" element={<RegisterNewRepair/>}/>
                   <Route path="/report/list" element={<ReportList />}/>
                   <Route path="/reportTypeRepair" element={<ReportTypeRepair/>}/>
-                  <Route path="/reportMotorRepair" element={<ReportMotorRepair/>}/>
-                  <Route path="/reportTimeRepair" element={<ReportTimeRepair/>}/>
                   <Route path="*" element={<NotFound/>} />
               </Routes>
           </div>
