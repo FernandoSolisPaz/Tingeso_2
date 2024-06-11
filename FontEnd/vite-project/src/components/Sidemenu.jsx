@@ -61,6 +61,12 @@ export default function Sidemenu({ open, toggleDrawer}){
                     </ListItemIcon>
                     <ListItemText primary="Report" />
                 </ListItemButton>
+                <ListItemButton onClick={() => navigate("/receipt/list")}>
+                    <ListItemIcon>
+                        <DescriptionIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="See All Receipts" />
+                </ListItemButton>
             </List>
         </Box>
     );
